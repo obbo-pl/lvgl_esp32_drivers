@@ -178,6 +178,12 @@ menu "LVGL TFT Display controller"
         bool
         help
             PCD8544 display controller (Nokia 3110/5110)
+
+    config LV_TFT_DISPLAY_CONTROLLER_UC8179C
+        bool
+        help
+            UltraChip UC8179C display controller with Waveshare 7.5inch e-paper B panel.
+
     # Display controller communication protocol
     #
     # This symbols define the communication protocol used by the
@@ -347,6 +353,11 @@ menu "LVGL TFT Display controller"
         config LV_TFT_DISPLAY_USER_CONTROLLER_PCD8544
             bool "PCD8544"
             select LV_TFT_DISPLAY_CONTROLLER_PCD8544
+            select LV_TFT_DISPLAY_PROTOCOL_SPI
+            select LV_TFT_DISPLAY_MONOCHROME
+        config LV_TFT_DISPLAY_USER_CONTROLLER_UC8179C
+            bool "UC8179C"
+            select LV_TFT_DISPLAY_CONTROLLER_UC8179C
             select LV_TFT_DISPLAY_PROTOCOL_SPI
             select LV_TFT_DISPLAY_MONOCHROME
     endchoice
@@ -911,7 +922,7 @@ menu "LVGL TFT Display controller"
                 Configure the display Reset pin here.
 
         config LV_DISP_PIN_BUSY
-            int "GPIO for Busy" if LV_TFT_DISPLAY_CONTROLLER_IL3820 || LV_TFT_DISPLAY_CONTROLLER_JD79653A || LV_TFT_DISPLAY_CONTROLLER_UC8151D
+            int "GPIO for Busy" if LV_TFT_DISPLAY_CONTROLLER_IL3820 || LV_TFT_DISPLAY_CONTROLLER_JD79653A || LV_TFT_DISPLAY_CONTROLLER_UC8151D || LV_TFT_DISPLAY_CONTROLLER_UC8179C
             default 35 if LV_TFT_DISPLAY_CONTROLLER_IL3820 || LV_TFT_DISPLAY_CONTROLLER_JD79653A || LV_TFT_DISPLAY_CONTROLLER_UC8151D
             default 35 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2
             default 21 if IDF_TARGET_ESP32C3

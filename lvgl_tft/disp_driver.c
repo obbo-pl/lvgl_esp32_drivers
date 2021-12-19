@@ -45,6 +45,8 @@ void *disp_driver_init(void)
     ili9163c_init();
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544
     pcd8544_init();
+#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8179C
+   uc8179c_init();
 #endif
 
     // We still use menuconfig for these settings
@@ -111,6 +113,8 @@ void disp_driver_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t *
     ili9163c_flush(drv, area, color_map);
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544
     pcd8544_flush(drv, area, color_map);
+#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8179C
+    uc8179c_lv_fb_flush(drv, area, color_map);
 #endif
 }
 
@@ -128,6 +132,8 @@ void disp_driver_rounder(lv_disp_drv_t * disp_drv, lv_area_t * area)
     uc8151d_lv_rounder_cb(disp_drv, area);
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544
     pcd8544_rounder(disp_drv, area);
+#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8179C
+    uc8179c_lv_rounder_cb(disp_drv, area);
 #endif
 }
 
@@ -146,5 +152,7 @@ void disp_driver_set_px(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_
     uc8151d_lv_set_fb_cb(disp_drv, buf, buf_w, x, y, color, opa);
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544
    pcd8544_set_px_cb(disp_drv, buf, buf_w, x, y, color, opa);
+#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8179C
+    uc8179c_lv_set_fb_cb(disp_drv, buf, buf_w, x, y, color, opa);
 #endif
 }
