@@ -74,6 +74,12 @@ static inline void disp_spi_send_colors(uint8_t *data, size_t length) {
         NULL, 0, 0);
 }
 
+#define LV_SPI_DRIVER_SUPPORT_READ_DATA
+static inline void disp_spi_read_data(uint8_t *data, size_t length) {
+    disp_spi_transaction(NULL, length, DISP_SPI_RECEIVE | DISP_SPI_SEND_POLLING, data, 0, 0);
+}
+
+
 #ifdef __cplusplus
 } /* extern "C" */
 #endif
