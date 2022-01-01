@@ -79,7 +79,11 @@ extern "C" {
 #elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544)
 #define DISP_BUF_SIZE  (LV_HOR_RES_MAX * (LV_VER_RES_MAX / 8))
 #elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8179C)
-#define DISP_BUF_SIZE ((LV_HOR_RES_MAX * LV_VER_RES_MAX) / 8) // 2C 48000 bytes
+#if LV_COLOR_DEPTH == 1
+#define DISP_BUF_SIZE ((LV_HOR_RES_MAX * LV_VER_RES_MAX) / 8) // 48000 bytes
+#else
+#define DISP_BUF_SIZE ((LV_HOR_RES_MAX * LV_VER_RES_MAX) / 4) // 96000 bytes
+#endif
 #else
 #error "No display controller selected"
 #endif
